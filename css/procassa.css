@@ -161,7 +161,7 @@ p{margin:0 0 1em}
 /* Obras */
 .obras{background:var(--blanco)}
 .filtros{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px}
-.filtros button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;font:600 .92rem Montserrat,sans-serif;color:var(--tinta);background:var(--cal);transition:background-color .25s,color .25s}
+.filtros button{all:unset;cursor:pointer;display:inline-flex;align-items:center;min-height:44px;box-sizing:border-box;gap:8px;padding:10px 16px;border-radius:999px;font:600 .92rem Montserrat,sans-serif;color:var(--tinta);background:var(--cal);transition:background-color .25s,color .25s}
 .filtros button span{font:700 .75rem Nunito,sans-serif;color:var(--gris)}
 .filtros button:hover{background:var(--cal-2)}
 .filtros button[aria-pressed=true]{background:var(--noche);color:#fff}
@@ -216,7 +216,7 @@ p{margin:0 0 1em}
 .contacto__datos{list-style:none;margin:30px 0 0;padding:0;border-top:1px solid rgba(255,255,255,.14)}
 .contacto__datos li{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.14)}
 .contacto__datos span{font:700 .72rem Montserrat,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gris-claro)}
-.contacto__datos a,.contacto__datos b{display:inline-flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font:700 1.05rem Montserrat,sans-serif;letter-spacing:-.01em;word-break:break-word}
+.contacto__datos a,.contacto__datos b{display:inline-flex;align-items:center;min-height:44px;gap:10px;color:#fff;text-decoration:none;font:700 1.05rem Montserrat,sans-serif;letter-spacing:-.01em;word-break:break-word}
 .contacto__datos svg{width:18px;height:18px;fill:var(--celeste);flex:none}
 .contacto__datos b svg{fill:var(--oro)}
 .contacto__datos a:hover{color:var(--celeste)}
@@ -277,7 +277,7 @@ p{margin:0 0 1em}
   .cab__nav a{font-size:1.6rem;font-weight:700;padding:8px 0}
   .cab.abierto .cab__nav{transform:none}
   .cab.abierto{background:var(--noche)}
-  .cab__menu{display:grid;place-items:center;gap:6px;width:46px;height:46px;border:0;background:var(--noche-3);border-radius:8px;cursor:pointer;position:relative;z-index:2}
+  .cab__menu{display:grid;place-items:center;gap:6px;align-content:center;width:46px;height:46px;border:0;background:var(--noche-3);border-radius:8px;cursor:pointer;position:relative;z-index:2}
   .cab__menu span:not(.vh){display:block;width:20px;height:2px;background:#fff;transition:transform .3s}
   .cab.abierto .cab__menu span:nth-child(1){transform:translateY(4px) rotate(45deg)}
   .cab.abierto .cab__menu span:nth-child(2){transform:translateY(-4px) rotate(-45deg)}
@@ -289,7 +289,7 @@ p{margin:0 0 1em}
   .ad__marco{height:auto;width:100%}
   .ad__pestanas{flex-direction:row;overflow-x:auto;scrollbar-width:none;margin:0 calc(-1 * var(--gutter));padding:0 var(--gutter)}
   .ad__pestanas::-webkit-scrollbar{display:none}
-  .ad__pestanas button{flex:none;padding:10px 14px}
+  .ad__pestanas button{flex:none;padding:10px 14px;min-height:44px;box-sizing:border-box;display:flex;align-items:center}
   .ad__pestanas button small{display:none}
   .ad__pestanas button[aria-selected=true]{box-shadow:inset 0 -3px 0 var(--celeste)}
   .ad__marco{max-height:none}
@@ -340,3 +340,9 @@ p{margin:0 0 1em}
 }
 @property --p{syntax:"<number>";inherits:true;initial-value:50}
 .ad__marco.anima{transition:--p .6s var(--suave)}
+.pie__datos span{white-space:nowrap}
+.obra.recorte{display:none}
+.obras__mas{display:flex;margin:26px auto 0}
+.obras__mas[hidden]{display:none}
+.obras__mas{color:var(--tinta);background:var(--cal);box-shadow:inset 0 0 0 1.5px var(--tinta)}
+.obras__mas:hover{background:var(--noche);color:#fff}

@@ -61,11 +61,24 @@
   }
 
   // ---------- filtros de obras ----------
-  const filtros = $$('[data-filtro]'), obras = $$('.obra');
+  const filtros = $$('[data-filtro]'), obras = $$('.obra'), mas = $('[data-mas]');
+  // en el móvil se ven 6 obras y un botón para ver el resto (menos scroll); con un filtro se ven todas las suyas
+  const movil = matchMedia('(max-width:640px)');
+  let todas = false;
+  const recortar = () => {
+    const activo = $('[data-filtro][aria-pressed=true]');
+    const f = activo ? activo.dataset.filtro : 'todas';
+    const corta = movil.matches && f === 'todas' && !todas;
+    obras.forEach((o, i) => o.classList.toggle('recorte', corta && i >= 6));
+    if (mas) mas.hidden = !corta;
+  };
+  if (mas) mas.addEventListener('click', () => { todas = true; recortar(); if (obras[6]) obras[6].querySelector('button').focus({ preventScroll: true }); });
+  movil.addEventListener('change', recortar); recortar();
   filtros.forEach((b) => b.addEventListener('click', () => {
     filtros.forEach((x) => x.setAttribute('aria-pressed', x === b));
     const f = b.dataset.filtro;
     obras.forEach((o) => { const ver = f === 'todas' || o.dataset.tipo === f; o.hidden = !ver; if (ver) o.classList.add('visto'); });
+    recortar();
   }));
 
   // ---------- ficha de obra con visor ----------
@@ -88,7 +101,7 @@
     actual = fichas[id]; if (!actual) return; quien = desde;
     $('#ficha-t').textContent = actual.t; $('#ficha-meta').textContent = actual.l; $('#ficha-x').textContent = actual.x;
     $('#ficha-p').innerHTML = actual.p.map((p) => `<li>${p.replace(/</g, '&lt;')}</li>`).join('');
-    $('#ficha-ig').innerHTML = 'En su Instagram: ' + actual.ig.map((c, i) => `<a href="https://www.instagram.com/p/${c}/" rel="noopener" target="_blank">${actual.ig.length > 1 ? 'vídeo ' + (i + 1) : 'ver el vídeo'}</a>`).join(' · ');
+    $('#ficha-ig').innerHTML = 'En nuestro Instagram: ' + actual.ig.map((c, i) => `<a href="https://www.instagram.com/p/${c}/" rel="noopener" target="_blank">${actual.ig.length > 1 ? 'vídeo ' + (i + 1) : 'ver el vídeo'}</a>`).join(' · ');
     minis.innerHTML = actual.f.map((f, i) => `<button type="button" aria-label="Foto ${i + 1}"><img src="img/${f.id}-c-400.webp" alt="" loading="lazy"></button>`).join('');
     $$('button', minis).forEach((b, i) => b.addEventListener('click', () => ir(i)));
     ir(0);
